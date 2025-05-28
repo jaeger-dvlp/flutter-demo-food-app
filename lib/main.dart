@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:food_app_demo/pages/favorites_page.dart';
+import 'package:food_app_demo/theme/app_theme.dart';
 import 'package:go_router/go_router.dart';
 import './providers/theme_provider.dart';
 
@@ -38,8 +39,8 @@ class MainApp extends ConsumerWidget {
     return MaterialApp.router(
       debugShowCheckedModeBanner: false,
       title: 'Food App Demo',
-      theme: ThemeData.dark(),
-      darkTheme: ThemeData.dark(),
+      theme: AppTheme.lightTheme,
+      darkTheme: AppTheme.darkTheme,
       themeMode: ref.watch(themeProvider),
       routerConfig: _router,
     );
