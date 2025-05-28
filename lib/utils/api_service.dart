@@ -20,4 +20,19 @@ class ApiService {
       throw Exception('API Error: $e');
     }
   }
+
+  Future<Recipe?> getRecipeById(String id) async {
+    try {
+      final response = await _dio.get('$baseUrl/lookup.php?i=$id');
+
+      if (response.data['meals'] == null || response.data['meals'].isEmpty) {
+        return null;
+      }
+
+      final data = response.data["meals"][0];
+      return Recipe.fromJson(data);
+    } catch (e) {
+      throw Exception('API Error: $e');
+    }
+  }
 }
