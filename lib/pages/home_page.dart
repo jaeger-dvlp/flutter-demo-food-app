@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:food_app_demo/pages/detail_page.dart';
+import 'package:food_app_demo/providers/theme_provider.dart';
 import 'package:go_router/go_router.dart';
 
 import '../models/recipe_model.dart';
@@ -42,6 +43,12 @@ class _HomePageState extends ConsumerState<HomePage> {
               context.push('/favorites');
             },
             child: const Text('Favorites'),
+          ),
+          IconButton(
+            onPressed: () {
+              ref.read(themeProvider.notifier).toggleTheme();
+            },
+            icon: const Icon(Icons.brightness_6),
           ),
         ],
       ),
