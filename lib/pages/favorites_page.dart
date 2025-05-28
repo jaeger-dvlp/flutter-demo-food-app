@@ -20,6 +20,7 @@ class _FavoritesPageState extends State<FavoritesPage> {
   @override
   void initState() {
     super.initState();
+    _favoriteService = widget.favoriteService ?? FavoriteService();
     _loadFavorites();
   }
 
