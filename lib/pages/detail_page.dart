@@ -64,12 +64,12 @@ class _DetailPageState extends State<DetailPage> {
             ),
             const SizedBox(height: 16),
             Text(
-              "Kategori : ${widget.recipe.strCategory}",
+              "Category : ${widget.recipe.strCategory}",
               style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
             ),
             const SizedBox(height: 16),
             Text(
-              "Hazırlık Talimatları :",
+              "Instructions :",
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 8),

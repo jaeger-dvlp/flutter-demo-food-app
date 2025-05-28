@@ -35,7 +35,7 @@ class _HomePageState extends ConsumerState<HomePage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Yemek Tarifleri Demo"),
+        title: const Text("Meal Recipes"),
         centerTitle: true,
         actions: [
           ElevatedButton(
@@ -62,7 +62,7 @@ class _HomePageState extends ConsumerState<HomePage> {
                   child: TextField(
                     controller: _searchController,
                     decoration: const InputDecoration(
-                      hintText: 'Yemek ara...',
+                      hintText: 'Search recipe...',
                       border: OutlineInputBorder(),
                     ),
                   ),
@@ -74,7 +74,7 @@ class _HomePageState extends ConsumerState<HomePage> {
             const SizedBox(height: 20),
             Expanded(
               child: recipeList.isEmpty
-                  ? const Center(child: const Text('Yemek araması yapın.'))
+                  ? const Center(child: Text('Search for a recipe.'))
                   : ListView.builder(
                       itemCount: recipeList.length,
                       itemBuilder: (context, index) {
