@@ -3,7 +3,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 class FavoriteService {
   static const String _key = "favorite_ids";
 
-  static Future<void> addFavorite(String id) async {
+  Future<void> addFavorite(String id) async {
     final prefs = await SharedPreferences.getInstance();
     final List<String> currentFavs = prefs.getStringList(_key) ?? [];
 
@@ -13,7 +13,7 @@ class FavoriteService {
     }
   }
 
-  static Future<void> deleteFavorite(String id) async {
+  Future<void> deleteFavorite(String id) async {
     final prefs = await SharedPreferences.getInstance();
     final List<String> currentFavs = prefs.getStringList(_key) ?? [];
 
@@ -23,12 +23,12 @@ class FavoriteService {
     }
   }
 
-  static Future<List<String>> getFavorites() async {
+  Future<List<String>> getFavorites() async {
     final prefs = await SharedPreferences.getInstance();
     return prefs.getStringList(_key) ?? [];
   }
 
-  static Future<bool> isFavorite(String id) async {
+  Future<bool> isFavorite(String id) async {
     final list = await getFavorites();
     return list.contains(id);
   }

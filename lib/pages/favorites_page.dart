@@ -5,7 +5,8 @@ import '../pages/detail_page.dart';
 import '../utils/favorite_service.dart';
 
 class FavoritesPage extends StatefulWidget {
-  const FavoritesPage({super.key});
+  final FavoriteService? favoriteService;
+  const FavoritesPage({super.key, this.favoriteService});
 
   @override
   State<FavoritesPage> createState() => _FavoritesPageState();
@@ -14,6 +15,7 @@ class FavoritesPage extends StatefulWidget {
 class _FavoritesPageState extends State<FavoritesPage> {
   List<Recipe> favoriteRecipes = [];
   bool isLoading = true;
+  late final FavoriteService _favoriteService;
 
   @override
   void initState() {
@@ -26,7 +28,7 @@ class _FavoritesPageState extends State<FavoritesPage> {
       isLoading = true;
     });
 
-    final favoriteIds = await FavoriteService.getFavorites();
+    final favoriteIds = await _favoriteService.getFavorites();
     List<Recipe> loadedFavorites = [];
 
     for (final id in favoriteIds) {
@@ -43,7 +45,7 @@ class _FavoritesPageState extends State<FavoritesPage> {
   }
 
   Future<void> _removeFavorite(String id) async {
-    await FavoriteService.deleteFavorite(id);
+    await _favoriteService.deleteFavorite(id);
     await _loadFavorites();
   }
 

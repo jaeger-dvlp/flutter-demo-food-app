@@ -6,8 +6,9 @@ import '../utils/favorite_service.dart';
 
 class DetailPage extends StatefulWidget {
   final Recipe recipe;
+  final FavoriteService? favoriteService;
 
-  const DetailPage({super.key, required this.recipe});
+  const DetailPage({super.key, required this.recipe, this.favoriteService});
 
   @override
   State<DetailPage> createState() => _DetailPageState();
@@ -15,15 +16,17 @@ class DetailPage extends StatefulWidget {
 
 class _DetailPageState extends State<DetailPage> {
   bool isFavorite = false;
+  late final FavoriteService _favoriteService;
 
   @override
   void initState() {
     super.initState();
+    _favoriteService = widget.favoriteService ?? FavoriteService();
     _loadFavoriteStatus();
   }
 
   Future<void> _loadFavoriteStatus() async {
-    final result = await FavoriteService.isFavorite(widget.recipe.idMeal);
+    final result = await _favoriteService.isFavorite(widget.recipe.idMeal);
     setState(() {
       isFavorite = result;
     });
@@ -31,9 +34,9 @@ class _DetailPageState extends State<DetailPage> {
 
   Future<void> _toggleFavorite() async {
     if (isFavorite) {
-      await FavoriteService.deleteFavorite(widget.recipe.idMeal);
+      await _favoriteService.deleteFavorite(widget.recipe.idMeal);
     } else {
-      await FavoriteService.addFavorite(widget.recipe.idMeal);
+      await _favoriteService.addFavorite(widget.recipe.idMeal);
     }
 
     setState(() {
@@ -60,7 +63,9 @@ class _DetailPageState extends State<DetailPage> {
           children: [
             ClipRRect(
               borderRadius: BorderRadius.circular(12),
-              child: Image.network(widget.recipe.strMealThumb),
+              child: widget.recipe.strMealThumb.isEmpty
+                  ? const Placeholder(fallbackHeight: 200)
+                  : Image.network(widget.recipe.strMealThumb),
             ),
             const SizedBox(height: 16),
             Text(
